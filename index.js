@@ -1,6 +1,6 @@
 const express=require("express");
-const errorHandler = require("./functions/middleware/errorHandler");
-const connectDb = require("./functions/config/dbConnection");
+const errorHandler = require("./middleware/errorHandler");
+const connectDb = require("./config/dbConnection");
 const  ServerlessHttp = require("serverless-http");
 const { messaging } = require("firebase-admin");
 const dotenv=require("dotenv").config();
@@ -8,7 +8,7 @@ connectDb();
 const app=express();
 const Port= 5001  ;
 app.use(express.json());
-app.use("/.netlify/api/contacts",require("./functions/routes/contactsRoutes"));
+app.use("/.netlify/api/contacts",require("./routes/contactsRoutes"));
 
 app.get("/.netlify/api/use",(req,res)=>{
     return res.json({  messages:"dwafsfd"});
@@ -16,7 +16,7 @@ app.get("/.netlify/api/use",(req,res)=>{
 
 
 
-app.use("/api/user",require("./functions/routes/userRoutes"));
+app.use("/api/user",require("./routes/userRoutes"));
 app.use(errorHandler);
 const handler =ServerlessHttp(app);
 app.listen(Port,()=>{
