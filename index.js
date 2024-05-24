@@ -6,7 +6,7 @@ const { messaging } = require("firebase-admin");
 const dotenv=require("dotenv").config();
 connectDb();
 const app=express();
-const Port= 5001  ;
+const Port= 8080;
 app.use(express.json());
 app.use("/api/contacts",require("./routes/contactsRoutes"));
 
